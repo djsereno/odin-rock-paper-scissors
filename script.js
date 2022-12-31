@@ -69,17 +69,16 @@ function game() {
     } else {
       playerScore += results[0];
     }
+    computerScore = i + 1 - playerScore;
 
-    console.log(
-      'Player: ' + playerScore + ', Computer: ' + (i + 1 - playerScore)
-    );
+    console.log('Player: ' + playerScore + ', Computer: ' + computerScore);
     console.log('--------------------------------------------');
 
     // Check if game is over
     if (playerScore > 2) {
       console.log('GAME OVER: You win! Great job!');
       break;
-    } else if (i + 1 - playerScore > 2) {
+    } else if (computerScore > 2) {
       console.log('GAME OVER: You lose! Better luck next time!');
       break;
     }
