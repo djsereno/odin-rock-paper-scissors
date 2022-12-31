@@ -12,7 +12,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
-    return [-1, 'Tie!'];
+    return [-1, 'Tie. Rematch!'];
   }
 
   switch (playerSelection) {
@@ -39,6 +39,8 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   let playerScore = 0;
+  console.log('ROCK, PAPER, SCISSORS: Best of 5');
+  console.log('--------------------------------------------');
 
   // Get player selection
   for (let i = 0; i < 5; i++) {
