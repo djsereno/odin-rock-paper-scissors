@@ -11,37 +11,79 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  
-  playerSelection = playerSelection.toLowerCase();
-
   if (playerSelection == computerSelection) {
-    return 'Tie!';
+    return [-1, 'Tie!'];
   }
 
   switch (playerSelection) {
     case 'rock':
       if (computerSelection == 'paper') {
-        return 'You Lose! Paper beats Rock';
+        return [0, 'You Lose! Paper beats Rock'];
       } else {
-        return 'You Win! Rock beats Scissors';
+        return [1, 'You Win! Rock beats Scissors'];
       }
     case 'paper':
       if (computerSelection == 'scissors') {
-        return 'You Lose! Scissors beats Paper';
+        return [0, 'You Lose! Scissors beats Paper'];
       } else {
-        return 'You Win! Paper beats Rock';
+        return [1, 'You Win! Paper beats Rock'];
       }
     case 'scissors':
       if (computerSelection == 'rock') {
-        return 'You Lose! Rock beats Scissors';
+        return [0, 'You Lose! Rock beats Scissors'];
       } else {
-        return 'You Win! Scissors beats Paper';
+        return [1, 'You Win! Scissors beats Paper'];
       }
   }
 }
 
-const playerSelection = 'rock';
-const computerSelection = getComputerChoice();
-console.log('Player: ' + playerSelection);
-console.log('Computer: ' + computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  let playerScore = 0;
+
+  // Get player selection
+  for (let i = 0; i < 5; i++) {
+    let playerSelection;
+    while (
+      playerSelection != 'rock' &&
+      playerSelection != 'paper' &&
+      playerSelection != 'scissors'
+    ) {
+      playerSelection = prompt('Input your selection: ').toLowerCase();
+    }
+
+    // Get computer selection
+    computerSelection = getComputerChoice();
+    console.log(
+      'Player: ' +
+        playerSelection.toUpperCase() +
+        ', Computer: ' +
+        computerSelection.toUpperCase()
+    );
+
+    // Display game results
+    let results = playRound(playerSelection, computerSelection);
+    console.log(results[1]);
+
+    if (results[0] == -1) {
+      i -= 1;
+    } else {
+      playerScore += results[0];
+    }
+
+    console.log(
+      'Player: ' + playerScore + ', Computer: ' + (i + 1 - playerScore)
+    );
+    console.log('--------------------------------------------');
+
+    // Check if game is over
+    if (playerScore > 2) {
+      console.log('GAME OVER: You win! Great job!');
+      break;
+    } else if (i + 1 - playerScore > 2) {
+      console.log('GAME OVER: You lose! Better luck next time!');
+      break;
+    }
+  }
+}
+
+game();
