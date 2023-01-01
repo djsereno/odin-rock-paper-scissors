@@ -11,39 +11,59 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+  let playerWin;
+  let message;
+
   if (playerSelection == computerSelection) {
-    return [-1, 'Tie. Rematch!'];
+    playerWin = -1;
+    message = 'Tie. Rematch!';
+  } else {
+    switch (playerSelection) {
+      case 'rock':
+        if (computerSelection == 'paper') {
+          playerWin = 0;
+          message = 'You Lose! Paper beats Rock';
+        } else {
+          playerWin = 1;
+          message = 'You Win! Rock beats Scissors';
+        }
+        break;
+      case 'paper':
+        if (computerSelection == 'scissors') {
+          playerWin = 0;
+          message = 'You Lose! Scissors beats Paper';
+        } else {
+          playerWin = 1;
+          message = 'You Win! Paper beats Rock';
+        }
+        break;
+      case 'scissors':
+        if (computerSelection == 'rock') {
+          playerWin = 0;
+          message = 'You Lose! Rock beats Scissors';
+        } else {
+          playerWin = 1;
+          message = 'You Win! Scissors beats Paper';
+        }
+        break;
+    }
   }
 
-  switch (playerSelection) {
-    case 'rock':
-      if (computerSelection == 'paper') {
-        return [0, 'You Lose! Paper beats Rock'];
-      } else {
-        return [1, 'You Win! Rock beats Scissors'];
-      }
-    case 'paper':
-      if (computerSelection == 'scissors') {
-        return [0, 'You Lose! Scissors beats Paper'];
-      } else {
-        return [1, 'You Win! Paper beats Rock'];
-      }
-    case 'scissors':
-      if (computerSelection == 'rock') {
-        return [0, 'You Lose! Rock beats Scissors'];
-      } else {
-        return [1, 'You Win! Scissors beats Paper'];
-      }
-  }
+  return {
+    playerWin: playerWin,
+    message: message,
+  };
 }
 
 function game() {
-  let playerScore = 0;
+  let playerScore = 0,
+    computerScore = 0;
   console.log('ROCK, PAPER, SCISSORS: Best of 5');
   console.log('--------------------------------------------');
 
-  // Get player selection
-  for (let i = 0; i < 5; i++) {
+  let game = 0;
+  while (game < 5) {
+    // Get player selection
     let playerSelection;
     while (
       playerSelection != 'rock' &&
@@ -64,14 +84,14 @@ function game() {
 
     // Display game results
     let results = playRound(playerSelection, computerSelection);
-    console.log(results[1]);
+    console.log(results.message);
 
-    if (results[0] == -1) {
-      i -= 1;
-    } else {
-      playerScore += results[0];
+    // Rematch if a tie game occurs
+    if (results.playerWin >= 0) {
+      game += 1;
+      playerScore += results.playerWin;
+      computerScore = game - playerScore;
     }
-    computerScore = i + 1 - playerScore;
 
     console.log('Player: ' + playerScore + ', Computer: ' + computerScore);
     console.log('--------------------------------------------');
