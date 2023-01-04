@@ -8,10 +8,25 @@
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <div class="buttons">
-      <button type="button">Rock</button>
-      <button type="button">Paper</button>
-      <button type="button">Scissors</button>
+    <h1>Rock, Paper, Scissors</h1>
+    <p>Best out of 5 rounds wins.</p>
+    <p class="scores">
+      Player: <span class="player-score">0</span>, Computer:
+      <span class="computer-score">0</span>
+    </p>
+    <div class="button-container">
+      <button type="button" class="choice">Rock</button>
+      <button type="button" class="choice">Paper</button>
+      <button type="button" class="choice">Scissors</button>
+    </div>
+    <div class="results-container">
+      <p class="selections">
+        Player: <span class="player-choice">0</span>, Computer:
+        <span class="computer-choice">0</span>
+      </p>
+      <p class="round-results"></p>
+      <p class="game-results"></p>
+      <button type="button" class="new-game"></button>
     </div>
   </body>
 </html>
