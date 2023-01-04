@@ -24,6 +24,7 @@ choiceButtons.forEach((button) => {
 });
 newGameButton.addEventListener("click", initGame);
 
+// Initializes game values to zero and removes screen text as necessary
 function initGame() {
   playerScore = 0;
   computerScore = 0;
@@ -37,6 +38,7 @@ function initGame() {
   newGameButton.style.display = "none";
 }
 
+// Manages score keeping and updates screen output
 function playGame(playerSelection) {
   if (gameActive) {
     let computerSelection = getComputerChoice();
@@ -70,6 +72,7 @@ function playGame(playerSelection) {
   }
 }
 
+// Plays one full round and returns the outcome
 function playRound(playerSelection, computerSelection) {
   let playerWin;
   let message;
@@ -115,6 +118,7 @@ function playRound(playerSelection, computerSelection) {
   };
 }
 
+// Returns a random computer choice
 function getComputerChoice() {
   let choice = Math.floor(Math.random() * 3);
   switch (choice) {
@@ -127,6 +131,7 @@ function getComputerChoice() {
   }
 }
 
+// Ends the game, updates screen text, and prompts for new game
 function endGame(playerWin) {
   gameActive = false;
   if (playerWin) {
